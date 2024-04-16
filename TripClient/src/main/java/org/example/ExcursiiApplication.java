@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import org.example.protobuffprotocol.TripServicesRPCProxyProto;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -34,7 +35,8 @@ public class ExcursiiApplication extends Application {
         }
         var port = Integer.parseInt(propertiesClient.getProperty("port"));
         var host = propertiesClient.getProperty("host");
-        ITripServices server = new TripServicesRPCProxy(host, port);
+        ITripServices server = new TripServicesRPCProxyProto(host, port);
+//        ITripServices server = new TripServicesRPCProxy(host, port);
         UtilizatorController mainController = fxmlLoader.getController();
         mainController.setServer(server, stage);
     }

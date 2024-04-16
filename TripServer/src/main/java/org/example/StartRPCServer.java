@@ -2,6 +2,7 @@ package org.example;
 
 import org.example.Utils.AbstractServer;
 import org.example.Utils.RPCConcurrentServer;
+import org.example.Utils.RPCConcurrentServerProto;
 
 import java.io.FileReader;
 import java.util.Properties;
@@ -32,7 +33,8 @@ public class StartRPCServer {
         String pass=propertiesServer.getProperty("Port");
         var intPass = Integer.parseInt(pass);
         System.out.println("Starting server on port " + intPass);
-        AbstractServer server = new RPCConcurrentServer(intPass, tripServices);
+//        AbstractServer server = new RPCConcurrentServer(intPass, tripServices);
+        AbstractServer server = new RPCConcurrentServerProto(intPass, tripServices);
         try{
             server.start();
         } catch (Exception e) {

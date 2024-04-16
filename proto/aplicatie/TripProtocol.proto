@@ -60,7 +60,6 @@ message Response {
     UPDATE = 4;
   }
   ReponseType type = 1;
-
   string error = 2;
   Utilizator utilizator = 3;
   repeated ExcursieDTO excursii = 4;
