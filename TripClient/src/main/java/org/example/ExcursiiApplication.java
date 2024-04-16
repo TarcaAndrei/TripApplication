@@ -22,11 +22,6 @@ public class ExcursiiApplication extends Application {
 //        clearSelectionClickOutside(fxmlLoader, scene);
         stage.setTitle("Login");
         stage.setScene(scene);
-//        stage.setOnCloseRequest(event -> {
-//            UtilizatorController controller = fxmlLoader.getController();
-//            controller.logout();
-//        });
-//        aici nu merge
         stage.show();
     }
 
