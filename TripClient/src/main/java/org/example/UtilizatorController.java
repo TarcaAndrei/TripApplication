@@ -62,6 +62,7 @@ public class UtilizatorController implements ITripObserver {
         gridMain.setVisible(false);
         stage.setOnCloseRequest(event -> {
             logout();
+            System.exit(0);
         });
     }
     public void loadWindow(Utilizator client){
@@ -290,6 +291,7 @@ public class UtilizatorController implements ITripObserver {
         Platform.runLater(() -> {
             reloadTabelMain();
             reloadTabelSecundar();
+
         });
     }
 
@@ -299,6 +301,7 @@ public class UtilizatorController implements ITripObserver {
         }
         try {
             server.logOut(utilizator.getUsername());
+            this.utilizator = null;
         } catch (AppException e) {
             throw new RuntimeException(e);
         }
