@@ -1,15 +1,32 @@
 package org.example;
 
+import javax.persistence.*;
 import java.io.Serializable;
 
-public class Rezervare extends Entitate<Integer>  implements Serializable {
+
+@Table(name = "Rezervari")
+@Entity
+@AttributeOverrides({
+        @javax.persistence.AttributeOverride(name = "id", column = @javax.persistence.Column(name = "ID"))
+})
+public class Rezervare extends Entitate  implements Serializable {
+
+    @Column(name = "NUME_CLIENT")
     private String numeClient;
+    @Column(name = "TELEFON_CLIENT")
     private String telefonClient;
+    @ManyToOne
+    @JoinColumn(name = "ID_EXCURSIE")
     private Excursie excursie;
+    @Column(name = "NR_BILETE")
     private Integer numarBilete;
 
     public String getNumeClient() {
         return numeClient;
+    }
+
+
+    public Rezervare() {
     }
 
     public void setNumeClient(String numeClient) {

@@ -1,14 +1,36 @@
 package org.example;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalTime;
 
-public class Excursie extends Entitate<Integer>  implements Serializable {
+
+@Entity
+@Table(name="Excursii")
+@AttributeOverrides({
+        @AttributeOverride(name="id", column = @Column(name="ID"))
+})
+public class Excursie extends Entitate  implements Serializable {
+
+    @Column(name="OBIECTIV_TURISTIC")
     private String obiectivTuristic;
+
+    @ManyToOne
+    @JoinColumn(name="ID_FIRMA_TRANSPORT")
     private FirmaTransport firmaTransport;
+
+    @Column(name="ORA_PLECARII")
     private LocalTime oraPlecarii;
+
+    @Column(name="PRET")
     private Double pret;
+
+    @Column(name="NR_LOCURI")
     private Integer numarLocuriTotale;
+
+
+    public Excursie() {
+    }
 
     public Excursie(String obiectivTuristic, FirmaTransport firmaTransport, LocalTime oraPlecarii, Double pret, Integer numarLocuriTotale) {
         this.obiectivTuristic = obiectivTuristic;

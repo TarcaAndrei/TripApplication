@@ -2,5 +2,5 @@ package org.example;
 
 
 
-public interface RepositoryFirmaTransport extends Repository<Integer, FirmaTransport> {
+public interface RepositoryFirmaTransport extends Repository<FirmaTransport> {
 }

@@ -291,7 +291,6 @@ public class UtilizatorController implements ITripObserver {
         Platform.runLater(() -> {
             reloadTabelMain();
             reloadTabelSecundar();
-
         });
     }
 

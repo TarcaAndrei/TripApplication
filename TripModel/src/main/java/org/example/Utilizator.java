@@ -1,16 +1,29 @@
 package org.example;
 
+import javax.persistence.*;
 import java.io.Serializable;
 
-public class Utilizator extends Entitate<Integer>  implements Serializable {
+@Entity
+@AttributeOverrides({
+        @AttributeOverride(name="id", column = @Column(name="ID"))
+})
+@Table(name="Utilizatori")
+public class Utilizator extends Entitate  implements Serializable {
+
+    @Column(name="NUME")
     private String nume;
+    @Column(name="USERNAME")
     private String username;
+    @Column(name="PASSWORD")
     private String password;
 
     public Utilizator(String nume, String username, String password) {
         this.nume = nume;
         this.username = username;
         this.password = password;
+    }
+
+    public Utilizator() {
     }
 
     public String getNume() {

@@ -1,8 +1,12 @@
-package org.example;
+package org.example.RepositoryDB;
 
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.example.RepositoryUtilizator;
+import org.example.Utilizator;
+import org.example.UtilsDB;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
