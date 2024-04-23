@@ -4,6 +4,9 @@ import org.example.RepositoryDB.RepositoryDBExcursie;
 import org.example.RepositoryDB.RepositoryDBFirmaTransport;
 import org.example.RepositoryDB.RepositoryDBRezervare;
 import org.example.RepositoryDB.RepositoryDBUtilizator;
+import org.example.RepositoryHB.RepositoryHBExcursie;
+import org.example.RepositoryHB.RepositoryHBFirmaTransport;
+import org.example.RepositoryHB.RepositoryHBRezervare;
 import org.example.RepositoryHB.RepositoryHBUtilizator;
 import org.example.Utils.AbstractServer;
 import org.example.Utils.RPCConcurrentServerProto;
@@ -13,6 +16,7 @@ import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
 import java.io.FileReader;
+import java.time.LocalTime;
 import java.util.Properties;
 
 public class StartRPCServer {
@@ -58,11 +62,14 @@ public class StartRPCServer {
 
 //        RepositoryUtilizator utilizatorRepository = new RepositoryDBUtilizator(properties);
         RepositoryUtilizator utilizatorRepository = new RepositoryHBUtilizator(sessionFactory);
-        RepositoryFirmaTransport firmaTransportRepository = new RepositoryDBFirmaTransport(properties);
-        RepositoryExcursie excursieRepository = new RepositoryDBExcursie(properties, firmaTransportRepository);
-        RepositoryRezervare repositoryRezervare = new RepositoryDBRezervare(properties, excursieRepository);
-        ITripServices tripServices = new TripServices(utilizatorRepository, excursieRepository, firmaTransportRepository, repositoryRezervare);
+//        RepositoryFirmaTransport firmaTransportRepository = new RepositoryDBFirmaTransport(properties);
+        RepositoryFirmaTransport firmaTransportRepository = new RepositoryHBFirmaTransport(sessionFactory);
+//        RepositoryExcursie excursieRepository = new RepositoryDBExcursie(properties, firmaTransportRepository);
+        RepositoryExcursie excursieRepository = new RepositoryHBExcursie(sessionFactory);
+//        RepositoryRezervare repositoryRezervare = new RepositoryDBRezervare(properties, excursieRepository);
+        RepositoryRezervare repositoryRezervare = new RepositoryHBRezervare(sessionFactory);
 
+        ITripServices tripServices = new TripServices(utilizatorRepository, excursieRepository, firmaTransportRepository, repositoryRezervare);
         String pass=propertiesServer.getProperty("Port");
         var intPass = Integer.parseInt(pass);
         System.out.println("Starting server on port " + intPass);
@@ -74,6 +81,8 @@ public class StartRPCServer {
             System.err.println("Error starting the server " + e.getMessage());
         }
         finally {
+            System.out.println("Stopping server ..." );
+            System.out.println("-------------------------");
             tearDown();
         }
     }

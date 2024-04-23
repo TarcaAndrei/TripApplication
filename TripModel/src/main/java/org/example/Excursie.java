@@ -1,5 +1,7 @@
 package org.example;
 
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalTime;
@@ -20,7 +22,7 @@ public class Excursie extends Entitate  implements Serializable {
     private FirmaTransport firmaTransport;
 
     @Column(name="ORA_PLECARII")
-    private LocalTime oraPlecarii;
+    private String oraPlecarii;
 
     @Column(name="PRET")
     private Double pret;
@@ -35,7 +37,7 @@ public class Excursie extends Entitate  implements Serializable {
     public Excursie(String obiectivTuristic, FirmaTransport firmaTransport, LocalTime oraPlecarii, Double pret, Integer numarLocuriTotale) {
         this.obiectivTuristic = obiectivTuristic;
         this.firmaTransport = firmaTransport;
-        this.oraPlecarii = oraPlecarii;
+        this.oraPlecarii = oraPlecarii.toString();
         this.pret = pret;
         this.numarLocuriTotale = numarLocuriTotale;
     }
@@ -56,11 +58,11 @@ public class Excursie extends Entitate  implements Serializable {
         this.firmaTransport = firmaTransport;
     }
     public LocalTime getOraPlecarii() {
-        return oraPlecarii;
+        return LocalTime.parse(oraPlecarii);
     }
 
     public void setOraPlecarii(LocalTime oraPlecarii) {
-        this.oraPlecarii = oraPlecarii;
+        this.oraPlecarii = oraPlecarii.toString();
     }
 
     public Integer getNumarLocuriTotale() {
